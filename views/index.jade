@@ -1,12 +1,24 @@
 html
 	head
+		link(rel="shortcut icon" href="/static/favicon.ico")
 		link(rel="stylesheet" href="/static/button.css")
 
-		title Button
+		title button
 	
 	body
-		div#container
-			div#button(onclick="socket.emit('click')")
+		div#counterContainer(style='-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;', unselectable='one', onselectstart='return false;')
+			h2 total
+			h1#counter
+
+			h2 since joined
+			h1#session
+
+			h2 yours
+			h1#user
+
+		div#buttonContainer
+			div#button(onclick="socket.emit('click'); userCount++; update(userCount, 'user');")
+				img#smallerButton(src="/static/unpressed.png")
 
 		script(src="/static/socket.io-1.3.4.js")
 
