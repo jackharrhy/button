@@ -1,5 +1,4 @@
 	// Button //
-
 var
 	// VARIBLES
 	buttonCount,
@@ -18,7 +17,7 @@ fs.readFile('./count', 'utf8', function(err,data) {
 	buttonCount = parseInt(data);
 });
 
-/// SETUP EXPRESS
+	/// SETUP EXPRESS
 app.set('view engine', 'jade');			// Allow Jade to control rendering
 
 app.get('/', function(req, res) {
@@ -28,7 +27,7 @@ app.get('/', function(req, res) {
 // Make the folder './static' accsessable on /static
 app.use('/static', express.static(__dirname + '/static'));
 
-/// LOGGING CLICKS
+	/// LOGGING CLICKS
 function logClicks() {
 	if(buttonCount && buttonCount !== prevButtonCount) {
 		fs.writeFile('count', String(buttonCount), function(err) {
@@ -41,8 +40,7 @@ function logClicks() {
 }
 setTimeout(logClicks, 5000);
 
-/// SOCKET.IO + SERVER INITIATION
-
+	/// SOCKET.IO + SERVER INITIATION
 var io = require('socket.io').listen(app.listen(3000, function() {
 	console.log('[%] Listening @ localhost:3000');
 }));
