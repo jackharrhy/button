@@ -18,7 +18,7 @@ html
 
 		div#buttonContainer
 			div#button(onclick="socket.emit('click'); userCount++; update(userCount, 'user');")
-				img#smallerButton(src="static/unpressed.png")
+				img(src="static/unpressed.png")
 
 		script(src="static/socket.io-1.3.4.js")
 		script(src="static/button.js")
