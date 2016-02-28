@@ -1,5 +1,5 @@
 var
-	socket = io(),
+	socket = io({ path: '/button/socket.io' }),
 
 	buttonCount,
 	sessionCount = 0,
