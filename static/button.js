@@ -1,17 +1,16 @@
-var
-	socket = io({ path: '/button/socket.io' }),
+var socket = io({ path: '/button/socket.io' });
 
-	buttonCount,
-	sessionCount = 0,
-	userCount = 0;
+var buttonCount;
+var sessionCount = 0;
+var userCount = 0;
 
 function click() {
 	socket.emit('click');
 	console.log('click');
 }
 
-function update(interger, domElement) {
-	document.getElementById(domElement).innerHTML = String(interger);
+function update(num, domElement) {
+	document.getElementById(domElement).innerHTML = String(num);
 }
 
 socket.on('new socket', function(count) {
