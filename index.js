@@ -1,33 +1,26 @@
-	// Button //
-var
-	// VARIBLES
-	buttonCount,
-	prevButtonCount,
+console.log('[0] Button started!');
 
-	// LIBARIES
-	fs = require('fs'),								// File System
+var buttonCount;
+var prevButtonCount;
 
-	express = require('express'),			 // Express.js
-	app = express();
+var fs = require('fs');
 
-// Set buttonCount to the contents of './count'
+var express = require('express');
+var app = express();
+
+app.set('view engine', 'jade');
+app.get('/', function(req, res) {
+	res.render('index');
+});
+
+app.use('/static', express.static(__dirname + '/static'));
+
 fs.readFile('./count', 'utf8', function(err,data) {
 	if(err) throw err;
 
 	buttonCount = parseInt(data);
 });
 
-	/// SETUP EXPRESS
-app.set('view engine', 'jade');			// Allow Jade to control rendering
-
-app.get('/', function(req, res) {
-	res.render('index');							// Return 'index.jade' when requesting '/'
-});
-
-// Make the folder './static' accsessable on /static
-app.use('/static', express.static(__dirname + '/static'));
-
-	/// LOGGING CLICKS
 function logClicks() {
 	if(buttonCount && buttonCount !== prevButtonCount) {
 		fs.writeFile('count', String(buttonCount), function(err) {
@@ -40,8 +33,7 @@ function logClicks() {
 }
 setTimeout(logClicks, 5000);
 
-	/// SOCKET.IO + SERVER INITIATION
-var io = require('socket.io').listen(app.listen(3000, function() {
+var io = require('socket.io').listen(app.listen(9191, function() {
 	console.log('[%] Listening @ localhost:3000');
 }));
 
@@ -56,4 +48,3 @@ io.sockets.on('connection', function(socket) {
 		io.emit('click', buttonCount);
 	});
 });
-
